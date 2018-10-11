@@ -78,9 +78,9 @@ function patch(options, data) {
     return request(options, verifyBody(data));
 }
 
-function delete(options) {
+function deleteRequest(options) {
     options.method = 'DELETE'
-    return request(options, verifyBody(data));
+    return request(options);
 }
 
 
@@ -104,5 +104,6 @@ module.exports = {
     post,
     put,
     patch,
-    request
+    request,
+    deleteRequest
 }
