@@ -1,16 +1,11 @@
 {
   "name": "http-request-promise-simple",
   "version": "0.1.0",
-  "description": "Read from google mail accounts and feed the CRM",
-  "scripts": {
-    "start": "node index.js",
-    "start:development": "NODE_ENV=development node index.js",
-    "start:production": "NODE_ENV=production node index.js",
-    "generateTokens": "node tokenGenerator/getNewTokens.js"
-  },
+  "description": "Dependency-less http methods for pure nodejs",
+  "scripts": {},
   "repository": {
     "type": "git",
-    "url": "git@peslmgitcoina01.es.corp.leroymerlin.com:es-lm-proyectos-IT/gsuit-to-crm.git"
+    "url": "https://github.com/franciscosucre/http-request-promise-simple"
   },
   "author": "franciscojsucreg@gmail.com",
   "dependencies": {}
