@@ -78,6 +78,11 @@ function patch(options, data) {
     return request(options, verifyBody(data));
 }
 
+function delete(options) {
+    options.method = 'DELETE'
+    return request(options, verifyBody(data));
+}
+
 
 function verifyBody(data) {
     assert(data != null && data != '' && !Array.isArray(data), `Invalid body for request "${data}"`);
