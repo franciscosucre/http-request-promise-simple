@@ -1,5 +1,17 @@
-const HttpRequestException = require('./HttpRequestException'),
-    assert = require('assert');
+const HttpBadRequestException = require('./exceptions/HttpBadRequestException'),
+    HttpNotFoundException = require('./exceptions/HttpNotFoundException'),
+    assert = require('assert'),
+    {
+        CONNECT,
+        DELETE,
+        GET,
+        HEAD,
+        OPTIONS,
+        PATCH,
+        POST,
+        PUT,
+        TRACE
+    } = require('./methods');
 
 const request = function (options, data) {
     const hostname = options.hostname ? options.hostname : options.host;
@@ -16,13 +28,15 @@ const request = function (options, data) {
             // we are done, resolve promise with those joined chunks
             res.on('end', () => {
                 if (res.statusCode === 404) {
-                    return reject(new HttpRequestException(url, res.statusMessage));
+                    return reject(new HttpNotFoundException(url));
                 } else if (res.statusCode < 200 || res.statusCode > 299) {
                     let errorBody = body.join('');
                     try {
-                        return reject(new HttpRequestException(url, JSON.parse(errorBody)));
+                        const error = JSON.parse(errorBody);
+                        error.url = error;
+                        return reject(error);
                     } catch (error) {
-                        return reject(new HttpRequestException(url, errorBody));
+                        return reject(new HttpBadRequestException(url, errorBody));
                     }
                 }
                 if (body.length == 0) {
@@ -41,47 +55,47 @@ const request = function (options, data) {
 };
 
 function get(options) {
-    options.method = 'GET'
+    options.method = GET
     return request(options);
 }
 
 function head(options) {
-    options.method = 'HEAD'
+    options.method = HEAD
     return request(options);
 }
 
 function options(options) {
-    options.method = 'OPTIONS'
+    options.method = OPTIONS
     return request(options);
 }
 
 function connect(options) {
-    options.method = 'CONNECT'
+    options.method = CONNECT
     return request(options);
 }
 
 function trace(options) {
-    options.method = 'TRACE'
+    options.method = TRACE
     return request(options);
 }
 
 function post(options, data) {
-    options.method = 'POST'
+    options.method = POST
     return request(options, verifyBody(data));
 }
 
 function put(options, data) {
-    options.method = 'PUT'
+    options.method = PUT
     return request(options, verifyBody(data));
 }
 
 function patch(options, data) {
-    options.method = 'PATCH'
+    options.method = PATCH
     return request(options, verifyBody(data));
 }
 
 function deleteRequest(options) {
-    options.method = 'DELETE'
+    options.method = DELETE
     return request(options);
 }
 
