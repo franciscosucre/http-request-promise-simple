@@ -15,7 +15,9 @@ const request = function (options, data) {
             res.on('data', (chunk) => body.push(chunk));
             // we are done, resolve promise with those joined chunks
             res.on('end', () => {
-                if (res.statusCode < 200 || res.statusCode > 299) {
+                if (res.statusCode === 404) {
+                    return reject(new HttpRequestException(url, res.statusMessage));
+                } else if (res.statusCode < 200 || res.statusCode > 299) {
                     let errorBody = body.join('');
                     try {
                         return reject(new HttpRequestException(url, JSON.parse(errorBody)));
@@ -29,9 +31,9 @@ const request = function (options, data) {
                 return resolve(JSON.parse(body.join('')))
             });
         });
-        req.on('error', (err) => reject(new HttpRequestException(url, err)));
+        req.on('error', (err) => reject(err));
         // handle connection errors of the request
-        if (options.method != 'GET' && options.method != 'HEAD') {
+        if (data) {
             req.write(data);
         }
         req.end();
