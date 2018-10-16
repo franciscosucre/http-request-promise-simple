@@ -12,7 +12,9 @@ npm install --save http-request-promise-simple
 **Methods**
 ----------
 
-All methods recieve an **options** parameter, this corresponds to the [node http request options](https://nodejs.org/api/http.html#http_http_request_options_callback).
+All methods recieve an **options** parameter, this corresponds to the [node http request options](https://nodejs.org/api/http.html#http_http_request_options_callback). 
+
+Additionally to the nodejs options, it also recieves a **https** boolean options in order to use a https request instead of a http request.
 
 Some methods can be passed a **data** parameter, this corresponds to the request body. This can be passed as an object or a JSON string.
 
