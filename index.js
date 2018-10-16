@@ -99,17 +99,13 @@ function deleteRequest(options) {
     return request(options);
 }
 
-
 function verifyBody(data) {
     assert(data != null && data != '' && !Array.isArray(data), `Invalid body for request "${data}"`);
     if (typeof data === "object") {
         return JSON.stringify(data);
     }
     return data;
-
 }
-
-
 
 module.exports = {
     head,
