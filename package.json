@@ -1,6 +1,6 @@
 {
   "name": "http-request-promise-simple",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Dependency-less http methods for pure nodejs",
   "scripts": {
     "test": "set NODE_ENV=test&& mocha -u tdd --timeout 999999 --colors test/**/*.js"
