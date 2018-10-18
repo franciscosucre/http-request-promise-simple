@@ -119,7 +119,10 @@ describe('Http request promise simple', () => {
                 port: PORT,
             });
             res.should.be.an.instanceof(Object);
-            res.should.be.eql({});
+            res.should.be.eql({
+                status: res.statusCode,
+                statusCode: res.statusCode
+            });
         });
 
     });

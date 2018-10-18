@@ -40,9 +40,15 @@ const request = function (options, data) {
                     }
                 }
                 if (body.length == 0) {
-                    return resolve({})
+                    return resolve({
+                        status: res.statusCode,
+                        statusCode: res.statusCode
+                    })
                 }
-                return resolve(JSON.parse(body.join('')))
+                return resolve(Object.assign({
+                    status: res.statusCode,
+                    statusCode: res.statusCode
+                }, JSON.parse(body.join(''))))
             });
         });
         req.on('error', (err) => reject(err));
