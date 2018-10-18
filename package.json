@@ -3,7 +3,7 @@
   "version": "0.5.0",
   "description": "Dependency-less http methods for pure nodejs",
   "scripts": {
-    "test": "set NODE_ENV=test&& mocha -u tdd --timeout 999999 --colors test/**/*.js"
+    "test": "set NODE_ENV=test&& mocha"
   },
   "repository": {
     "type": "git",
