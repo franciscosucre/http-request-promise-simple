@@ -3,7 +3,15 @@
   "version": "0.5.1",
   "description": "Dependency-less http methods for pure nodejs",
   "scripts": {
-    "test": "set NODE_ENV=test&& mocha"
+    "test": "mocha -r ts-node/register test/**/*.test.ts",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
@@ -13,11 +21,20 @@
     "name": "Francisco Javier Sucre González",
     "email": "franciscojsucreg@gmail.com"
   },
+  "files": [
+    "lib/**/*"
+  ],
   "dependencies": {},
   "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/chai-http": "^3.0.5",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.12.14",
     "chai": "^4.2.0",
     "chai-http": "^4.2.0",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.2"
   },
   "keywords": [
     "http",
